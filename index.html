@@ -25,16 +25,24 @@
     <canvas id="canvas" width = "600" height="400"></canvas>
    </div>
    <div class="button">
-    <!-- The Nessesities -->
-    <button id="startBtn" class='btn'>Start</button>
-    <button id="pauseBtn" class='btn'>Pause</button>
-    <button id="restartBtn" class='btn'>Restart</button>
-    <p class='difficultySelect'> Select Difficulty:</p>
-    <!-- Difficulty Change Buttons -->
-    <button id='easyBtn' class='btn'>Easy</button>
-    <button id='mediumBtn' class='btn'>Medium</button>
-    <button id='hardBtn' class='btn'>Hard</button>
-   </div>
-   <p class='controlMessage'> Use the Up (↑) and down (↓) Arrows or Use W and S for control!</p>
+     <!-- The Nessesities --> 
+     <div class='Nessesities'>
+     <button id="startBtn" class='btn'>Start</button>
+     <button id="pauseBtn" class='btn'>Pause</button>
+     <button id="restartBtn" class='btn'>Restart</button>
+    </div>
+        <div class="Difficulty">
+            <!-- Difficulty Change -->
+            <h3 class='difficultySelect'> Select Difficulty:</h3>
+            <!-- Difficulty Change Buttons -->
+            <select id="difficultySelect" class="btn">
+                <option value='easyBtn'>Easy</option>
+                <option value='mediumBtn'>Medium</option>
+                <option value='hardBtn'>Hard</option>
+            </select>
+        </div>
+    </div>
+    <h3 class='controlMessage'> Controls:</h3>
+    <p class='controlMessage'> Use the Up (↑) and down (↓) Arrows or Use W and S for control!</p>
 </body>
 </html>
