@@ -1,0 +1,40 @@
+.containter {
+    display: Flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.button {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.btn {
+    background-color: lightblue;
+    color: white;
+    padding: 10ps 20px;
+    text-align: center;
+    display: inline-block;
+    font-size: 15px;
+    margin: 10px;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.btn:hover {
+    background-color: green;
+}
+
+.difficultySelect {
+    text-align: center;
+}
+
+.controlMessage {
+    text-align: center;
+}
+
+canvas {
+    background: green;
+}

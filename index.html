@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pong!</title>
+    <script defer src="./js/app.js"></script>
+    <link rel="stylesheet" href="./css/style.css">
+
+    <style>
+       @import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap');
+        * {
+            font-family: 'Pixelify Sans', sans-serif;
+        }
+        body { text-align: center;
+            canvas {
+                border: 1px solid black
+            }
+        }
+    </style>
+</head>
+<body>
+   <h1>Let's Play Pong!</h1> 
+   <div class="container">
+    <canvas id="canvas" width = "600" height="400"></canvas>
+   </div>
+   <div class="button">
+    <!-- The Nessesities -->
+    <button id="startBtn" class='btn'>Start</button>
+    <button id="pauseBtn" class='btn'>Pause</button>
+    <button id="restartBtn" class='btn'>Restart</button>
+    <p class='difficultySelect'> Select Difficulty:</p>
+    <!-- Difficulty Change Buttons -->
+    <button id='easyBtn' class='btn'>Easy</button>
+    <button id='mediumBtn' class='btn'>Medium</button>
+    <button id='hardBtn' class='btn'>Hard</button>
+   </div>
+   <p class='controlMessage'> Use the Up (↑) and down (↓) Arrows or Use W and S for control!</p>
+</body>
+</html>
