@@ -13,6 +13,10 @@
         let animationId
         let gameRunning = false
 
+    //Key Presses
+        let upPressed = false
+        let downPressed = false
+
 // Setting the Event Listeners
     startBtn.addEventListener('click', function() {
         if (!gameRunning) {
@@ -29,6 +33,9 @@
     restartBtn.addEventListener('click', function() {
         document.location.reload()
     })
+
+    document.addEventListener("keydown", keyDownPress)
+    document.addEventListener("keyup", keyUpPress)
 
     // EasyBtn.addEventListener('click')
     // MediumBtn.addEventListener('click')
@@ -48,6 +55,44 @@
         let leftPaddle = canvas.height / 2 - paddleHeight / 2
         let rightPaddle = canvas.height / 2 - paddleHeight / 2
         let paddleSpeed = 10
+    
+    //Paddle keyPresses
+        function keyUpPress(event) {
+            if (event.key === "ArrowUp") {
+                upPressed = true
+            } else if (event.key === "ArrowDown") {
+                downPressed = true
+            } else if (event.key === "w") {
+                wPressed = true
+            }  else if (event.key === "s") {
+                sPressed = true
+            }
+        }
 
+        function keyDwonPress(event) {
+            if (event.key === "ArrowUp") {
+                upPressed = false
+            } else if (event.key === "ArrowDown") {
+                downPressed = false
+            } else if (event.key === "w") {
+                wPressed = false
+            }  else if (event.key === "s") {
+                sPressed = false
+            }
+        }
 
+//Game State
+    //Paddles
+        function update() {
+            if (upPressed && leftpaddle > 0) {
+                leftPaddle -= paddleSpeed
+            } else if (downPressed && leftPaddle + paddleHeight < canvas.height) {
+                leftPaddle += paddleSpeed
+            }
+        }
+    
+    //Move Ball
+    ballX += ballSpeedX
+    ballY += ballSpeedY
 
+    
