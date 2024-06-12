@@ -30,7 +30,17 @@
         document.location.reload()
     })
 
-
     // EasyBtn.addEventListener('click')
     // MediumBtn.addEventListener('click')
     // HardBtn.addEventListener('click')
+
+    // Ball properties
+    let ballRadius = 5
+    let ballX = canvas.width / 2
+    let ballY = canvas.height / 2
+    let ballSpeedX = 5
+    let ballSpeedY = 5
+
+    // Paddle properties
+
+    let 
