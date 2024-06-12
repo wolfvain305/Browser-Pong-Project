@@ -34,13 +34,20 @@
     // MediumBtn.addEventListener('click')
     // HardBtn.addEventListener('click')
 
+//Game Items
     // Ball properties
-    let ballRadius = 5
-    let ballX = canvas.width / 2
-    let ballY = canvas.height / 2
-    let ballSpeedX = 5
-    let ballSpeedY = 5
+        let ballRadius = 5
+        let ballX = canvas.width / 2
+        let ballY = canvas.height / 2
+        let ballSpeedX = 5
+        let ballSpeedY = 5
 
     // Paddle properties
+        let paddleHeight = 80
+        let paddleWidth = 10
+        let leftPaddle = canvas.height / 2 - paddleHeight / 2
+        let rightPaddle = canvas.height / 2 - paddleHeight / 2
+        let paddleSpeed = 10
 
-    let 
+
+
