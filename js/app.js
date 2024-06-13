@@ -7,9 +7,9 @@
         let startBtn = document.getElementById('startBtn')
         let pauseBtn = document.getElementById('pauseBtn')
         let restartBtn = document.getElementById('restartBtn')
-        let EasyBtn = document.getElementById('restartBtn')
-        let MediumBtn = document.getElementById('restartBtn')
-        let HardBtn = document.getElementById('restartBtn')
+        // let EasyBtn = document.getElementById('restartBtn')
+        // let MediumBtn = document.getElementById('restartBtn')
+        // let HardBtn = document.getElementById('restartBtn')
         let animationId
         let gameRunning = false
 
@@ -38,6 +38,11 @@
 
     document.addEventListener("keydown", keyDownPress)
     document.addEventListener("keyup", keyUpPress)
+
+    // Loads the game when first opening page
+    addEventListener("load", (event) => {
+        draw()
+    })
 
     // EasyBtn.addEventListener('click')
     // MediumBtn.addEventListener('click')
@@ -101,9 +106,11 @@
     //If Ball Hits a paddle
         
     // Ball Moving and resetting
-    function Balls () {
-        ballX 
-        ballY
+    function Ballreset () {
+        ballX = canvas.width / 2
+        ballY = canvas.height / 2
+        ballSpeedX = -ballSpeedX
+        ballSpeedY = Math.random() *10 - 5
     }
 
 // Game Properties on Canvas
@@ -121,8 +128,8 @@
             ctx.closePath()
         
         // Score Boards
-            ctx.
-            ctx.
+            // ctx.
+            // ctx.
 
         // Ball
             ctx.beginPath()
