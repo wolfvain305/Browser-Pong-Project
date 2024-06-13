@@ -16,6 +16,8 @@
     //Key Presses
         let upPressed = false
         let downPressed = false
+        let wPressed = false
+        let sPressed = false
 
 // Setting the Event Listeners
     startBtn.addEventListener('click', function() {
@@ -57,7 +59,7 @@
         let paddleSpeed = 10
     
     //Paddle keyPresses
-        function keyUpPress(event) {
+        function keyDownPress(event) {
             if (event.key === "ArrowUp") {
                 upPressed = true
             } else if (event.key === "ArrowDown") {
@@ -69,7 +71,7 @@
             }
         }
 
-        function keyDwonPress(event) {
+        function keyUpPress(event) {
             if (event.key === "ArrowUp") {
                 upPressed = false
             } else if (event.key === "ArrowDown") {
@@ -81,18 +83,65 @@
             }
         }
 
-//Game State
-    //Paddles
+//Game State of Play
+    //Paddless
         function update() {
-            if (upPressed && leftpaddle > 0) {
+            if ((upPressed || wPressed) && leftPaddle > 0) {
                 leftPaddle -= paddleSpeed
-            } else if (downPressed && leftPaddle + paddleHeight < canvas.height) {
+            } else if ((downPressed || sPressed) && leftPaddle + paddleHeight < canvas.height) {
                 leftPaddle += paddleSpeed
             }
-        }
-    
-    //Move Ball
-    ballX += ballSpeedX
-    ballY += ballSpeedY
 
-    
+        
+        }
+    //Move Ball
+       ballX += ballSpeedX
+       ballY += ballSpeedY
+
+    //If Ball Hits a paddle
+        
+    // Ball Moving and resetting
+    function Balls () {
+        ballX 
+        ballY
+    }
+
+// Game Properties on Canvas
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height)
+
+            ctx.fillStyle = '#FFF'
+            ctx.font = '15px Arial'
+
+            ctx.beginPath()
+            ctx.moveTo(canvas.width / 2, 0)
+            ctx.lineTo(canvas.width / 2, canvas.height)
+            ctx.strokeStyle = '#FFF'
+            ctx.stroke()
+            ctx.closePath()
+        
+        // Score Boards
+            ctx.
+            ctx.
+
+        // Ball
+            ctx.beginPath()
+            ctx.arc(ballX, ballY, ballRadius, 0, Math.PI * 2)
+            ctx.fill()
+            ctx.closePath()
+
+        //Paddle
+            ctx.fillRect(0, leftPaddle, paddleWidth, paddleHeight)
+            ctx.fillRect(canvas.width - paddleWidth, rightPaddle, paddleWidth, paddleHeight)
+
+        
+        
+        }
+
+
+        // Game Loop
+        function loop() {
+            update()
+            draw()
+            animationId = requestAnimationFrame(loop)
+        }
