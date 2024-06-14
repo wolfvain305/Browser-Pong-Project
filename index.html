@@ -27,16 +27,20 @@
         <canvas id="canvas" width = "800" height="600"></canvas>
    </div>
    <div class="button">
-     <!-- The Nessesities --> 
-     <div class='Nessesities'>
-        <button id="startBtn" class='btn'>Start</button>
-        <button id="pauseBtn" class='btn'>Pause</button>
-        <button id="restartBtn" class='btn'>Restart</button>
-    </div>
-        <div class="Difficulty">
+        <!-- The Nessesities --> 
+        <div class='Nessesities'>
+           <button id="startBtn" class='btn'>Start</button>
+           <button id="pauseBtn" class='btn'>Pause</button>
+           <button id="restartBtn" class='btn'>Restart</button>
+        </div>
+        <div class = "game-choices">
+            <!-- Select between the 2 types -->
+            <h3 class="game-switcher">Game Mode:</h3>
+                <label><input type="radio" name="gameType" value="multiplayer" checked>Multiplayer</label>
+                <label><input type="radio" name="gameType" value="vsAI" checked>VS AI</label>
             <!-- Difficulty Change -->
             <h3 class='difficultySelect'> Select Difficulty:</h3>
-            <!-- Difficulty Change Buttons -->
+            <!-- Difficulty Change Values -->
             <select id="difficultySelect" class="btn">
                 <option value='easy'>Easy</option>
                 <option value='medium'>Medium</option>
@@ -46,3 +50,4 @@
     </div>
     <h3 class='controlMessage'> Controls:</h3>
     <p class='controlMessage'> Use the Up (↑) and down (↓) Arrows or Use W and S for control!</p>
+</body>

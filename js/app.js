@@ -3,20 +3,21 @@
         const canvas = document.getElementById("canvas")
         let ctx = canvas.getContext('2d')
 
-    //Buttons
+    //Buttons/Options
         const startBtn = document.getElementById('startBtn')
         const pauseBtn = document.getElementById('pauseBtn')
         const restartBtn = document.getElementById('restartBtn')
         let easy = document.getElementsByName('easy')
         let medium = document.getElementsByName('medium')
         let hard = document.getElementsByName('hard')
+
         let animationId
         let gameRunning = false
         
-        // Message Board
+    // Message Board
         const messageEl = document.getElementById('message');
-        
-        //Key Presses
+    
+    //Key Presses
         let upPressed = false
         let downPressed = false
         let wPressed = false
@@ -24,45 +25,48 @@
     
     //Game Items
         // Ball properties
-        let ballRadius = 10
-        let ballX = canvas.width / 2
-        let ballY = canvas.height / 2
-        let ballSpeedX = 2.5
-        let ballSpeedY = 2.5
+            let ballRadius = 10
+            let ballX = canvas.width / 2
+            let ballY = canvas.height / 2
+            let ballSpeedX = 2.5
+            let ballSpeedY = 2.5
 
         // Paddle properties
-        let paddleHeight = 100
-        let paddleWidth = 10
-        let leftPaddle = canvas.height / 2 - paddleHeight / 2
-        let rightPaddle = canvas.height / 2 - paddleHeight / 2
-        let paddleSpeed = 7.5
+            let paddleHeight = 100
+            let paddleWidth = 10
+            let leftPaddle = canvas.height / 2 - paddleHeight / 2
+            let rightPaddle = canvas.height / 2 - paddleHeight / 2
+            let paddleSpeed = 7.5
 
         // Score boarding
-        let leftPlayerScore = 0
-        let rightPlayerScore = 0
-        let winningScore = 2
+            let leftPlayerScore = 0
+            let rightPlayerScore = 0
+            let winningScore = 2
 
         // Difficulty
-        let selectDifficulty = document.getElementById('difficultySelect')
-        const difficultyLevels = {
-            easy: {
-                ballSpeedX: 2.5,
-                ballSpeedY: 2.5,
-                paddleSpeed: 5
-            },
-            medium: {
-                ballSpeedX: 3.5,
-                ballSpeedY: 3.5,
-                paddleSpeed: 7.5
-            },
-            hard: {
-                ballSpeedX: 5,
-                ballSpeedY: 5,
-                paddleSpeed: 10
-            },
-        }
-    
-        let currentDifficulty = difficultyLevels.easy
+            let selectDifficulty = document.getElementById('difficultySelect')
+            const difficultyLevels = {
+                easy: {
+                    ballSpeedX: 2.5,
+                    ballSpeedY: 2.5,
+                    paddleSpeed: 5
+                },
+                medium: {
+                    ballSpeedX: 3.5,
+                    ballSpeedY: 3.5,
+                    paddleSpeed: 7.5
+                },
+                hard: {
+                    ballSpeedX: 5,
+                    ballSpeedY: 5,
+                    paddleSpeed: 10
+                },
+            }
+        
+            let currentDifficulty = difficultyLevels.easy
+        // Game Mode
+            const gameModeRadios = document.getElementsByName('gameType')
+            let vsAIRadio = document.querySelector('input[value="vsAI"]')
 
 // Setting the Event Listeners
     startBtn.addEventListener('click', function() {
@@ -93,8 +97,18 @@
         setDifficulty(this.value); // this.value will be 'easy', 'medium', or 'hard'
     });
 
-    // Functions
-    
+    // Game Mode Listeer
+    gameModeRadios.forEach(radio => {
+        radio.addEventListener('change', function() {
+            if (radio.value === 'vsAI') {
+                vsAIRadio.checked = true
+                selectDifficulty.disabled = false
+            } else {
+                selectDifficulty.disabled = true
+            }
+        })
+    })
+// Functions
     //Movement 
     function keyDownPress(event) {
         if (event.key === "ArrowUp") {
@@ -141,28 +155,42 @@
 
     //Change Difficulty    
     function setDifficulty(difficulty) {
-        currentDifficulty = difficultyLevels[difficulty]
-        ballSpeedX = currentDifficulty.ballSpeedX
-        ballSpeedY = currentDifficulty.ballSpeedY
+        if (currentDifficulty) {
+            currentDifficulty = difficultyLevels[difficulty]
+            ballSpeedX = currentDifficulty.ballSpeedX
+            ballSpeedY = currentDifficulty.ballSpeedY
+        } else {
+            console.error("Invalid difficulty selected:", difficulty)
+        }
     }
     
 
 //Game State of Play
     function update() {
         //moving paddles
-        if ((upPressed || wPressed) && leftPaddle > 0) {
+
+        if ((wPressed) && leftPaddle > 0) {
             leftPaddle -= paddleSpeed
-            } else if ((downPressed || sPressed) && leftPaddle + paddleHeight < canvas.height) {
+            } else if ((downPressed) && leftPaddle + paddleHeight < canvas.height) {
                 leftPaddle += paddleSpeed
             }
-            
-        // Right Paddle as computer
+
+        if (vsAIRadio.checked) {
+            // Right Paddle as computer
             if ( ballY > rightPaddle) {
                 rightPaddle += paddleSpeed
             } else if (ballY < rightPaddle) {
                 rightPaddle -= paddleSpeed
             }
-
+        } else {
+            //Right Player as Human
+            if ((upPressed) && rightPaddle > 0) {
+            leftPaddle -= paddleSpeed
+            } else if ((downPressed) && rightPaddle + paddleHeight < canvas.height) {
+                rightPaddle += paddleSpeed
+            }
+        }
+        
         //Move Ball
            ballX += ballSpeedX
            ballY += ballSpeedY
