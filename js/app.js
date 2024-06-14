@@ -1,17 +1,20 @@
 // Constants
     //Canvas
-        let canvas = document.getElementById("canvas")
+        const canvas = document.getElementById("canvas")
         let ctx = canvas.getContext('2d')
 
     //Buttons
-        let startBtn = document.getElementById('startBtn')
-        let pauseBtn = document.getElementById('pauseBtn')
-        let restartBtn = document.getElementById('restartBtn')
+        const startBtn = document.getElementById('startBtn')
+        const pauseBtn = document.getElementById('pauseBtn')
+        const restartBtn = document.getElementById('restartBtn')
         // let EasyBtn = document.getElementById('restartBtn')
         // let MediumBtn = document.getElementById('restartBtn')
         // let HardBtn = document.getElementById('restartBtn')
         let animationId
         let gameRunning = false
+
+    // Message Board
+        const messageEl = document.getElementById('message');
 
     //Key Presses
         let upPressed = false
@@ -66,9 +69,11 @@
     // Score Boarding
     let leftPlayerScore = 0
     let rightPlayerScore = 0
-    let maxScore = 10
+    let winningScore = 10
 
-//Paddle keyPresses / Ball Resetting
+// Functions
+
+    //Movement 
         function keyDownPress(event) {
             if (event.key === "ArrowUp") {
                 upPressed = true
@@ -100,6 +105,16 @@
             ballSpeedX = -ballSpeedX
             ballSpeedY = Math.random() *10 - 5
         }
+
+        // winningScore
+        function playerWin (player) {
+            if (player === "AI Player") {
+                messageEl.textContent = "Oh NO! Try Again"
+            } else if (player === "Left Player") {
+                messageEl.textContent = "Congrats! You Win!"
+            }
+            Ballreset()
+            }
 //Game State of Play
     function update() {
         //moving paddles
@@ -148,7 +163,14 @@
                 leftPlayerScore++
             }
         
+        // Max Score and Win
+            if (leftPlayerScore === winningScore) {
+                playerWin("Left player")
+            } else if (rightPlayerScore === winningScore){
+                playerWin("AI Player")
+            }
     }
+
 // Game Properties on Canvas
     function draw() {
         ctx.clearRect(0, 0, canvas.width, canvas.height)
@@ -161,9 +183,6 @@
         ctx.stroke()
         ctx.closePath()
     
-    // Score Boards
-        // ctx.
-        // ctx.
     // Ball
         ctx.beginPath()
         ctx.arc(ballX, ballY, ballRadius, 0, Math.PI * 2)
@@ -180,9 +199,9 @@
     }
 
 
-        // Game Loop
-        function loop() {
-            update()
-            draw()
-            animationId = requestAnimationFrame(loop)
-        }
+// Game Loop
+function loop() {
+    update()
+    draw()
+    animationId = requestAnimationFrame(loop)
+}      
