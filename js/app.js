@@ -7,6 +7,9 @@
         const startBtn = document.getElementById('startBtn')
         const pauseBtn = document.getElementById('pauseBtn')
         const restartBtn = document.getElementById('restartBtn')
+        let easy = document.getElementsByName('easy')
+        let medium = document.getElementsByName('medium')
+        let hard = document.getElementsByName('hard')
         let animationId
         let gameRunning = false
         
@@ -19,52 +22,47 @@
         let wPressed = false
         let sPressed = false
     
-    let easy = document.getElementsByName('easyBtn')
-    let medium = document.getElementsByName('mediumBtn')
-    let hard = document.getElementsByName('hardBtn')
-    
-    
     //Game Items
-    // Ball properties
-    let ballRadius = 10
-    let ballX = canvas.width / 2
-    let ballY = canvas.height / 2
-    let ballSpeedX = 2.5
-    let ballSpeedY = 2.5
+        // Ball properties
+        let ballRadius = 10
+        let ballX = canvas.width / 2
+        let ballY = canvas.height / 2
+        let ballSpeedX = 2.5
+        let ballSpeedY = 2.5
+
+        // Paddle properties
+        let paddleHeight = 100
+        let paddleWidth = 10
+        let leftPaddle = canvas.height / 2 - paddleHeight / 2
+        let rightPaddle = canvas.height / 2 - paddleHeight / 2
+        let paddleSpeed = 7.5
+
+        // Score boarding
+        let leftPlayerScore = 0
+        let rightPlayerScore = 0
+        let winningScore = 2
+
+        // Difficulty
+        let selectDifficulty = document.getElementById('difficultySelect')
+        const difficultyLevels = {
+            easy: {
+                ballSpeedX: 2.5,
+                ballSpeedY: 2.5,
+                paddleSpeed: 5
+            },
+            medium: {
+                ballSpeedX: 3.5,
+                ballSpeedY: 3.5,
+                paddleSpeed: 7.5
+            },
+            hard: {
+                ballSpeedX: 5,
+                ballSpeedY: 5,
+                paddleSpeed: 10
+            },
+        }
     
-    // Paddle properties
-    let paddleHeight = 100
-    let paddleWidth = 10
-    let leftPaddle = canvas.height / 2 - paddleHeight / 2
-    let rightPaddle = canvas.height / 2 - paddleHeight / 2
-    let paddleSpeed = 7.5
-    
-    // Score boarding
-    let leftPlayerScore = 0
-    let rightPlayerScore = 0
-    let winningScore = 2
-    
-    // Difficulty
-    let selectDifficulty = document.getElementById('difficultySelect')
-    const difficultyLevels = {
-        easy: {
-            ballSpeedX: 2.5,
-            ballSpeedY: 2.5,
-            paddleSpeed: 5
-        },
-        medium: {
-            ballSpeedX: 3.5,
-            ballSpeedY: 3.5,
-            paddleSpeed: 7.5
-        },
-        hard: {
-            ballSpeedX: 5,
-            ballSpeedY: 5,
-            paddleSpeed: 10
-        },
-    }
-    
-    let currentDifficulty = difficultyLevels.easy
+        let currentDifficulty = difficultyLevels.easy
 
 // Setting the Event Listeners
     startBtn.addEventListener('click', function() {
