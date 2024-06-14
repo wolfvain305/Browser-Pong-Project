@@ -63,6 +63,11 @@
         let rightPaddle = canvas.height / 2 - paddleHeight / 2
         let paddleSpeed = 7.5
     
+    // Score Boarding
+    let leftPlayerScore = 0
+    let rightPlayerScore = 0
+    let maxScore = 10
+
 //Paddle keyPresses / Ball Resetting
         function keyDownPress(event) {
             if (event.key === "ArrowUp") {
@@ -114,6 +119,7 @@
         //Move Ball
            ballX += ballSpeedX
            ballY += ballSpeedY
+
         //If Ball Hits canvas or paddle
             if (ballY - ballRadius < 0 || ballY + ballRadius > canvas.height) {
                 return(ballSpeedY = -ballSpeedY)
@@ -133,13 +139,15 @@
                 return(ballSpeedX = -ballSpeedX)
             }
         
-        // Ball ressetting when it goes out of bounds
+        // Ball ressetting when it goes out of bounds + adding score
             if (ballX < 0) {
                 Ballreset()
+                rightPlayerScore++
             } else if (ballX > canvas.width) {
                 Ballreset()
+                leftPlayerScore++
             }
-            
+        
     }
 // Game Properties on Canvas
     function draw() {
@@ -161,11 +169,14 @@
         ctx.arc(ballX, ballY, ballRadius, 0, Math.PI * 2)
         ctx.fill()
         ctx.closePath()
+
     //Paddle
         ctx.fillRect(0, leftPaddle, paddleWidth, paddleHeight)
         ctx.fillRect(canvas.width - paddleWidth, rightPaddle, paddleWidth, paddleHeight)
     
-    
+    //Scores
+    ctx.fillText("Score: " + leftPlayerScore, 10, 20)
+    ctx.fillText("Score: " + rightPlayerScore, canvas.width - 70, 20)
     }
 
 
