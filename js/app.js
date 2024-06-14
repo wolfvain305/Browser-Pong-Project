@@ -50,20 +50,20 @@
 
 //Game Items
     // Ball properties
-        let ballRadius = 5
+        let ballRadius = 10
         let ballX = canvas.width / 2
         let ballY = canvas.height / 2
-        let ballSpeedX = 5
-        let ballSpeedY = 5
+        let ballSpeedX = 2.5
+        let ballSpeedY = 2.5
 
     // Paddle properties
-        let paddleHeight = 80
+        let paddleHeight = 100
         let paddleWidth = 10
         let leftPaddle = canvas.height / 2 - paddleHeight / 2
         let rightPaddle = canvas.height / 2 - paddleHeight / 2
-        let paddleSpeed = 10
+        let paddleSpeed = 7.5
     
-    //Paddle keyPresses
+//Paddle keyPresses / Ball Resetting
         function keyDownPress(event) {
             if (event.key === "ArrowUp") {
                 upPressed = true
@@ -87,63 +87,86 @@
                 sPressed = false
             }
         }
-
+        
+        // Ball Moving and resetting
+        function Ballreset () {
+            ballX = canvas.width / 2
+            ballY = canvas.height / 2
+            ballSpeedX = -ballSpeedX
+            ballSpeedY = Math.random() *10 - 5
+        }
 //Game State of Play
-    //Paddless
-        function update() {
+    function update() {
+        //moving paddles
             if ((upPressed || wPressed) && leftPaddle > 0) {
                 leftPaddle -= paddleSpeed
             } else if ((downPressed || sPressed) && leftPaddle + paddleHeight < canvas.height) {
                 leftPaddle += paddleSpeed
             }
+            
+        // Right Paddle as computer
+            if ( ballY > rightPaddle) {
+                rightPaddle += paddleSpeed
+            } else if (ballY < rightPaddle) {
+                rightPaddle -= paddleSpeed
+            }
 
+        //Move Ball
+           ballX += ballSpeedX
+           ballY += ballSpeedY
+        //If Ball Hits canvas or paddle
+            if (ballY - ballRadius < 0 || ballY + ballRadius > canvas.height) {
+                return(ballSpeedY = -ballSpeedY)
+            }
+            if (
+                ballX - ballRadius < paddleWidth && 
+                ballY > leftPaddle &&
+                ballY < leftPaddle + paddleHeight
+            ){
+                return(ballSpeedX = -ballSpeedX)
+            }
+            if (
+                ballX + ballRadius > canvas.width - paddleWidth && 
+                ballY > rightPaddle &&
+                ballY < rightPaddle + paddleHeight
+            ) {
+                return(ballSpeedX = -ballSpeedX)
+            }
         
-        }
-    //Move Ball
-       ballX += ballSpeedX
-       ballY += ballSpeedY
-
-    //If Ball Hits a paddle
-        
-    // Ball Moving and resetting
-    function Ballreset () {
-        ballX = canvas.width / 2
-        ballY = canvas.height / 2
-        ballSpeedX = -ballSpeedX
-        ballSpeedY = Math.random() *10 - 5
+        // Ball ressetting when it goes out of bounds
+            if (ballX < 0) {
+                Ballreset()
+            } else if (ballX > canvas.width) {
+                Ballreset()
+            }
+            
     }
-
 // Game Properties on Canvas
-        function draw() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height)
-
-            ctx.fillStyle = '#FFF'
-            ctx.font = '15px Arial'
-
-            ctx.beginPath()
-            ctx.moveTo(canvas.width / 2, 0)
-            ctx.lineTo(canvas.width / 2, canvas.height)
-            ctx.strokeStyle = '#FFF'
-            ctx.stroke()
-            ctx.closePath()
-        
-        // Score Boards
-            // ctx.
-            // ctx.
-
-        // Ball
-            ctx.beginPath()
-            ctx.arc(ballX, ballY, ballRadius, 0, Math.PI * 2)
-            ctx.fill()
-            ctx.closePath()
-
-        //Paddle
-            ctx.fillRect(0, leftPaddle, paddleWidth, paddleHeight)
-            ctx.fillRect(canvas.width - paddleWidth, rightPaddle, paddleWidth, paddleHeight)
-
-        
-        
-        }
+    function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height)
+        ctx.fillStyle = '#FFF'
+        ctx.font = '15px Arial'
+        ctx.beginPath()
+        ctx.moveTo(canvas.width / 2, 0)
+        ctx.lineTo(canvas.width / 2, canvas.height)
+        ctx.strokeStyle = '#FFF'
+        ctx.stroke()
+        ctx.closePath()
+    
+    // Score Boards
+        // ctx.
+        // ctx.
+    // Ball
+        ctx.beginPath()
+        ctx.arc(ballX, ballY, ballRadius, 0, Math.PI * 2)
+        ctx.fill()
+        ctx.closePath()
+    //Paddle
+        ctx.fillRect(0, leftPaddle, paddleWidth, paddleHeight)
+        ctx.fillRect(canvas.width - paddleWidth, rightPaddle, paddleWidth, paddleHeight)
+    
+    
+    }
 
 
         // Game Loop
