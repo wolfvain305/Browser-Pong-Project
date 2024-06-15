@@ -41,7 +41,7 @@
         // Score boarding
             let leftPlayerScore = 0
             let rightPlayerScore = 0
-            let winningScore = 2
+            let winningScore = 5
 
         // Difficulty
             let selectDifficulty = document.getElementById('difficultySelect')
@@ -190,14 +190,15 @@
             } else if ((upPressed) && rightPaddle > 0) {
                 rightPaddle -= paddleSpeed;
             }
-        }
+        } 
+
         
         //Move Ball
            ballX += ballSpeedX
            ballY += ballSpeedY
 
         //If Ball Hits canvas or paddle
-            if (ballY - ballRadius < 0 || ballY + ballRadius > canvas.height) {
+            if (ballY - ballRadius < 0 || ballY + ballRadius > canvas.height) { //  "Had inspiration on how to have the ball interact with the canvas by Faraz"
                 return(ballSpeedY = -ballSpeedY)
             }
             if (
@@ -232,7 +233,7 @@
             }
     }
 
-// Game Properties on Canvas
+// Game Properties on Canvas "Had inspiration on how to do the canvas by Faraz"
     function draw() {
         ctx.clearRect(0, 0, canvas.width, canvas.height)
         ctx.fillStyle = '#FFF'
@@ -269,3 +270,7 @@ function loop() {
     }
     
 }      
+
+//Sources I used
+// https://www.codewithfaraz.com/content/124/how-to-create-a-ping-pong-game-with-html-css-and-javascript#css-code
+//https://www.youtube.com/watch?v=qIKG5ehbhIU&ab_channel=TechSchoolMediaEs
