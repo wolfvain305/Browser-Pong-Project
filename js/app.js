@@ -170,24 +170,25 @@
         //moving paddles
 
         if ((wPressed) && leftPaddle > 0) {
-            leftPaddle -= paddleSpeed
-            } else if ((downPressed) && leftPaddle + paddleHeight < canvas.height) {
-                leftPaddle += paddleSpeed
-            }
-
+            leftPaddle -= paddleSpeed;
+        } else if ((sPressed) && leftPaddle + paddleHeight < canvas.height) {
+            leftPaddle += paddleSpeed;
+        }
+    
+        // Update right paddle position (AI or second player)
         if (vsAIRadio.checked) {
-            // Right Paddle as computer
-            if ( ballY > rightPaddle) {
-                rightPaddle += paddleSpeed
+            // AI controlled right paddle
+            if (ballY > rightPaddle) {
+                rightPaddle += paddleSpeed;
             } else if (ballY < rightPaddle) {
-                rightPaddle -= paddleSpeed
+                rightPaddle -= paddleSpeed;
             }
         } else {
-            //Right Player as Human
-            if ((upPressed) && rightPaddle > 0) {
-            leftPaddle -= paddleSpeed
-            } else if ((downPressed) && rightPaddle + paddleHeight < canvas.height) {
-                rightPaddle += paddleSpeed
+            // Second player controlled right paddle (multiplayer mode)
+            if ((downPressed) && rightPaddle + paddleHeight < canvas.height) {
+                rightPaddle += paddleSpeed;
+            } else if ((upPressed) && rightPaddle > 0) {
+                rightPaddle -= paddleSpeed;
             }
         }
         
